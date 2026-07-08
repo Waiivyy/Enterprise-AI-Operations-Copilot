@@ -1,0 +1,16 @@
+[
+  {
+    "ticket_id": "TCK-1001",
+    "requester": "Maria Novak",
+    "requester_email": "maria.novak@example.invalid",
+    "title": "Cannot access Teams",
+    "description": "Maria can sign in but Teams says the license is missing."
+  },
+  {
+    "ticket_id": "TCK-1002",
+    "requester": "Owen Lee",
+    "requester_email": "owen.lee@example.invalid",
+    "title": "Prepare offboarding for Priya",
+    "description": "Priya is leaving Friday and needs SaaS access removed after manager handoff."
+  }
+]

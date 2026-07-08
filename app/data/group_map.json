@@ -1,0 +1,36 @@
+{
+  "baseline": {
+    "employees": {
+      "group_id": "group-employees",
+      "display_name": "All Employees"
+    }
+  },
+  "departments": {
+    "engineering": {
+      "group_id": "group-engineering",
+      "display_name": "Engineering"
+    },
+    "finance": {
+      "group_id": "group-finance",
+      "display_name": "Finance"
+    },
+    "sales": {
+      "group_id": "group-sales",
+      "display_name": "Sales"
+    }
+  },
+  "regions": {
+    "europe": {
+      "group_id": "group-europe",
+      "display_name": "Europe"
+    },
+    "north_america": {
+      "group_id": "group-north-america",
+      "display_name": "North America"
+    },
+    "global": {
+      "group_id": "group-global",
+      "display_name": "Global"
+    }
+  }
+}

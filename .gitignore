@@ -1,0 +1,15 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+app/data/*.sqlite
+reports/*.json
+reports/*.md
+!reports/.gitkeep
+!reports/sample-*.json
+!reports/sample-*.md

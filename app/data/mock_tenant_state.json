@@ -1,0 +1,32 @@
+{
+  "users": {
+    "maria.novak@example.invalid": {
+      "display_name": "Maria Novak",
+      "account_enabled": true,
+      "assigned_licenses": ["sku-m365-business-basic"],
+      "groups": ["group-sales", "group-europe", "group-employees"],
+      "region": "Europe",
+      "device_compliant": true,
+      "conditional_access_placeholder": "no-blocking-policy"
+    },
+    "sara.holm@example.invalid": {
+      "display_name": "Sara Holm",
+      "account_enabled": true,
+      "assigned_licenses": ["sku-m365-business-premium"],
+      "groups": ["group-engineering", "group-europe", "group-employees"],
+      "region": "Europe",
+      "device_compliant": true,
+      "conditional_access_placeholder": "no-blocking-policy"
+    }
+  },
+  "app_requirements": {
+    "teams": {
+      "required_license": "sku-m365-business-premium",
+      "required_group": "group-employees"
+    },
+    "box": {
+      "required_license": "sku-m365-business-standard",
+      "required_group": "group-employees"
+    }
+  }
+}

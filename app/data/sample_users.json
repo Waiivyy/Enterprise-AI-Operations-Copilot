@@ -1,0 +1,26 @@
+[
+  {
+    "display_name": "Sara Holm",
+    "email": "sara.holm@example.invalid",
+    "department": "Engineering",
+    "region": "Europe",
+    "employment_type": "full-time",
+    "manager": "Nina Patel"
+  },
+  {
+    "display_name": "Maria Novak",
+    "email": "maria.novak@example.invalid",
+    "department": "Sales",
+    "region": "Europe",
+    "employment_type": "full-time",
+    "manager": "Owen Lee"
+  },
+  {
+    "display_name": "Priya Shah",
+    "email": "priya.shah@example.invalid",
+    "department": "Finance",
+    "region": "North America",
+    "employment_type": "full-time",
+    "manager": "Elena Cruz"
+  }
+]

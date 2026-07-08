@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Enterprise AI Operations Copilot</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <h1>Enterprise AI Operations Copilot</h1>
+            <p>Simulation-first workflow planning for internal IT operations teams.</p>
+          </div>
+          <span class="status">Simulation mode</span>
+        </header>
+
+        <section class="composer" aria-label="Copilot request">
+          <label for="scenario">Scenario</label>
+          <select id="scenario">
+            <option value="onboarding">Onboarding</option>
+            <option value="offboarding">Offboarding</option>
+            <option value="access_troubleshooting">Access troubleshooting</option>
+            <option value="ticket_analysis">Ticket analysis</option>
+          </select>
+          <label for="message">Request</label>
+          <textarea id="message" rows="5">Plan onboarding for Sara, full-time employee in Europe, joining Engineering next Monday.</textarea>
+          <button id="submit" type="button">Generate plan</button>
+        </section>
+
+        <section class="result-grid" aria-live="polite">
+          <article class="panel">
+            <h2>Structured Response</h2>
+            <pre id="summary">Submit a request to generate a simulation-only plan.</pre>
+          </article>
+          <article class="panel">
+            <h2>Planned Actions</h2>
+            <ul id="actions"></ul>
+          </article>
+          <article class="panel">
+            <h2>Safety Notes</h2>
+            <ul id="safety"></ul>
+          </article>
+        </section>
+      </section>
+    </main>
+    <script>
+      const scenario = document.querySelector("#scenario");
+      const message = document.querySelector("#message");
+      const summary = document.querySelector("#summary");
+      const actions = document.querySelector("#actions");
+      const safety = document.querySelector("#safety");
+
+      const examples = {
+        onboarding: "Plan onboarding for Sara, full-time employee in Europe, joining Engineering next Monday.",
+        offboarding: "Create an offboarding checklist for Priya leaving on Friday.",
+        access_troubleshooting: "Maria cannot access Teams.",
+        ticket_analysis: "Analyze this ticket: Maria can sign in but Teams says the license is missing."
+      };
+
+      scenario.addEventListener("change", () => {
+        message.value = examples[scenario.value];
+      });
+
+      document.querySelector("#submit").addEventListener("click", async () => {
+        summary.textContent = "Generating...";
+        actions.innerHTML = "";
+        safety.innerHTML = "";
+        const response = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ scenario: scenario.value, message: message.value })
+        });
+        const payload = await response.json();
+        summary.textContent = JSON.stringify({
+          scenario: payload.scenario,
+          summary: payload.summary,
+          evidence: payload.evidence,
+          tool_plan: payload.tool_plan
+        }, null, 2);
+        for (const action of payload.planned_actions || []) {
+          const item = document.createElement("li");
+          item.textContent = `${action.target}: ${action.description}`;
+          actions.appendChild(item);
+        }
+        for (const note of payload.safety_notes || []) {
+          const item = document.createElement("li");
+          item.textContent = note;
+          safety.appendChild(item);
+        }
+      });
+    </script>
+  </body>
+</html>

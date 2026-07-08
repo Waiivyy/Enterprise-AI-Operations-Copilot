@@ -1,0 +1,28 @@
+{
+  "default": {
+    "sku_id": "sku-m365-business-basic",
+    "name": "Microsoft 365 Business Basic",
+    "reason": "Default productivity baseline",
+    "confidence": 0.72
+  },
+  "departments": {
+    "engineering": {
+      "sku_id": "sku-m365-business-premium",
+      "name": "Microsoft 365 Business Premium",
+      "reason": "Engineering collaboration baseline with security controls",
+      "confidence": 0.9
+    },
+    "finance": {
+      "sku_id": "sku-m365-e3",
+      "name": "Microsoft 365 E3",
+      "reason": "Finance compliance and data governance baseline",
+      "confidence": 0.86
+    },
+    "sales": {
+      "sku_id": "sku-m365-business-standard",
+      "name": "Microsoft 365 Business Standard",
+      "reason": "Sales productivity and customer communication baseline",
+      "confidence": 0.82
+    }
+  }
+}

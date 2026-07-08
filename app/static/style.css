@@ -83,8 +83,15 @@ h1 {
 
 .composer {
   display: grid;
-  gap: 10px;
+  gap: 14px;
   padding: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 14px;
+  align-items: end;
 }
 
 label {
@@ -127,10 +134,34 @@ button:hover {
   background: var(--accent-dark);
 }
 
+.prompt-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.example {
+  min-height: 38px;
+  color: #1f2a3a;
+  background: #eef3fb;
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.example:hover {
+  color: #fff;
+  background: #334155;
+}
+
 .result-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
   gap: 20px;
+}
+
+.response-panel {
+  grid-row: span 3;
 }
 
 .panel {
@@ -165,7 +196,9 @@ li + li {
 
 @media (max-width: 860px) {
   .topbar,
-  .result-grid {
+  .result-grid,
+  .form-row,
+  .prompt-buttons {
     grid-template-columns: 1fr;
   }
 

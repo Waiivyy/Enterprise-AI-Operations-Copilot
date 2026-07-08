@@ -2,15 +2,19 @@
 
 A simulation-first AI operations copilot for enterprise IT teams. It demonstrates how LLM planning, tool calling, mock Microsoft Graph workflows, IT ticket analysis, and audit reporting can be combined to support safer onboarding, offboarding, and access troubleshooting.
 
-The default demo is public-safe: it uses mock data, fake users, fake groups, fake license IDs, `example.invalid` email addresses, and a deterministic mock LLM provider. It does not connect to a real Microsoft 365 tenant or require OpenAI, Azure, Microsoft Graph, Slack, Box, Zoom, Notion, or company credentials.
+This project demonstrates the architecture of an AI-assisted operations copilot. The default demo uses a deterministic mock LLM provider so the repository can run without paid APIs or secrets. It does not connect to a real Microsoft 365 tenant or require OpenAI, Azure, Microsoft Graph, Slack, Box, Zoom, Notion, or company credentials.
+
+For local clone paths and examples, the recommended lowercase convention is `enterprise-ai-operations-copilot`.
 
 ## Why This Exists
 
-Internal IT teams often need to turn incomplete support requests into structured plans: which license fits, which groups are required, which SaaS apps need provisioning, what approvals are missing, and what evidence should be documented for audit review. This lab models those workflows with strict simulation boundaries so the planning, validation, and reporting design can be studied without touching production systems.
+Internal IT teams often need to turn incomplete support requests into structured plans: which license fits, which groups are required, which SaaS apps need provisioning, what approvals are missing, and what evidence should be documented for audit review. This lab models those workflows with strict simulation boundaries so planning, validation, and reporting patterns can be reviewed without touching production systems.
 
 ## Quick Demo
 
 ```bash
+git clone https://github.com/Waiivyy/Enterprise-AI-Operations-Copilot.git enterprise-ai-operations-copilot
+cd enterprise-ai-operations-copilot
 python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e ".[dev]"
@@ -25,26 +29,141 @@ curl -s http://127.0.0.1:8000/chat \
   -d '{"scenario":"onboarding","message":"Plan onboarding for Sara, full-time employee in Europe, joining Engineering next Monday."}'
 ```
 
-## Demo Output
+## Visual Proof
 
-See [assets/demo-output.md](assets/demo-output.md) for sample responses and planned actions.
+- [Architecture diagram](assets/architecture-diagram.md)
+- [Architecture SVG](assets/architecture-diagram.svg)
+- [Demo output examples](assets/demo-output.md)
+- [Project summary](assets/project-summary.md)
+- [Screenshot capture guide](docs/screenshots.md)
+- Sample reports in `reports/`
+
+Screenshots from the local demo:
+
+| Homepage | Onboarding response |
+| --- | --- |
+| ![Homepage showing scenario selector and example prompts](assets/screenshot-homepage.png) | ![Onboarding response showing planned actions, evidence, and safety notes](assets/screenshot-onboarding-response.png) |
+
+| Access troubleshooting | Ticket analysis |
+| --- | --- |
+| ![Access troubleshooting response showing Teams license evidence](assets/screenshot-access-troubleshooting.png) | ![Ticket analysis response showing classification and safety notes](assets/screenshot-ticket-analysis.png) |
+
+## Demo Scenarios
+
+### 1. Onboarding Planning
+
+Example prompt:
+
+```text
+Plan onboarding for Sara, full-time employee in Europe, joining Engineering next Monday.
+```
+
+What the copilot checks:
+
+- Department and region
+- Microsoft 365 license recommendation
+- Entra-style group recommendations
+- SaaS provisioning payloads
+- Approval and safety notes
+
+Example output summary:
+
+```text
+Simulation-only onboarding plan for Sara Holm. Recommended Microsoft 365 Business Premium.
+```
+
+### 2. Offboarding Planning
+
+Example prompt:
+
+```text
+Create an offboarding checklist for Priya leaving on Friday.
+```
+
+What the copilot checks:
+
+- Sign-in disablement planning
+- Session revocation planning
+- License and group removal planning
+- Manager handoff checklist
+- SaaS deprovisioning payloads
+
+Example output summary:
+
+```text
+Simulation-only offboarding plan for Priya Shah.
+```
+
+### 3. Microsoft Teams Access Troubleshooting
+
+Example prompt:
+
+```text
+Maria cannot access Teams.
+```
+
+What the copilot checks:
+
+- Mock tenant account status
+- Teams license requirement
+- Required group membership
+- Device compliance placeholder
+- Conditional access placeholder
+
+Example output summary:
+
+```text
+Likely cause: Teams license missing. Confidence 88%.
+```
+
+### 4. Ticket Classification
+
+Example prompt:
+
+```text
+Analyze this ticket: Maria can sign in but Teams says the license is missing.
+```
+
+What the copilot checks:
+
+- Category
+- Urgency
+- Likely system
+- Risk level
+- Required approvals
+- Automation candidacy
+
+Example output summary:
+
+```text
+Ticket classified as access_troubleshooting with medium risk.
+```
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-  user[User request] --> api[FastAPI]
+  user[User request] --> api[FastAPI API and static UI]
   api --> planner[Copilot planner]
   planner --> llm[Mock LLM provider]
   llm --> router[Tool router]
   router --> graphMock[Mock Graph client]
   router --> licenseAdvisor[License advisor]
   router --> groupAdvisor[Group advisor]
+  router --> saasPayloads[SaaS payload generator]
   router --> ticketAnalyzer[Ticket analyzer]
   router --> reportWriter[Report writer]
   reportWriter --> markdownReports[Markdown reports]
   reportWriter --> jsonReports[JSON reports]
 ```
+
+Simulation boundary:
+
+- No live Microsoft Graph calls.
+- No live SaaS calls.
+- No real tenant IDs, secrets, production endpoints, or company domains.
+- All demo emails use `example.invalid`.
+- Destructive actions are converted to simulation-only planned actions.
 
 ## Features
 
@@ -138,16 +257,10 @@ docker compose up --build
 
 The app will be available at `http://127.0.0.1:8000`.
 
-## Example Workflows
-
-- "Plan onboarding for Sara, full-time employee in Europe, joining Engineering next Monday."
-- "Create an offboarding checklist for Priya leaving on Friday."
-- "Maria cannot access Teams."
-- "Analyze this ticket: Maria can sign in but Teams says the license is missing."
-
 ## What It Does Not Claim
 
 - It is not production-ready automation.
+- It does not perform advanced real LLM reasoning in default mode.
 - It does not execute tenant changes.
 - It does not replace human approval, IT governance, HR confirmation, or service-owner review.
 - It does not include real credentials, real tenant data, or real employee information.
@@ -155,10 +268,11 @@ The app will be available at `http://127.0.0.1:8000`.
 ## Roadmap
 
 - Add richer SQLite-backed workflow history.
-- Add policy simulation for license and access rules.
+- Add policy simulation for license and app assignment rules.
 - Add approval-chain modeling.
 - Add optional OpenAI-compatible provider implementation behind explicit configuration.
 - Add richer report templates and redaction checks.
+- Add screenshot assets after running the local demo.
 
 ## License
 

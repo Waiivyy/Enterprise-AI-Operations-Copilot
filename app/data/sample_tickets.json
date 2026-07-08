@@ -12,5 +12,19 @@
     "requester_email": "owen.lee@example.invalid",
     "title": "Prepare offboarding for Priya",
     "description": "Priya is leaving Friday and needs SaaS access removed after manager handoff."
+  },
+  {
+    "ticket_id": "TCK-1003",
+    "requester": "Nina Patel",
+    "requester_email": "nina.patel@example.invalid",
+    "title": "Onboard Sara to Engineering",
+    "description": "Sara joins Engineering in Europe next Monday and needs standard collaboration tools."
+  },
+  {
+    "ticket_id": "TCK-1004",
+    "requester": "Noah Reed",
+    "requester_email": "noah.reed@example.invalid",
+    "title": "Device compliance blocks Teams",
+    "description": "Noah has the Teams license but access is blocked after a device compliance prompt."
   }
 ]

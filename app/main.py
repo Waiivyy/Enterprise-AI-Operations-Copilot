@@ -1,4 +1,5 @@
 from pathlib import Path
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
@@ -12,10 +13,18 @@ from app.core.logging import configure_logging
 configure_logging()
 settings = get_settings()
 
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    seed_demo_database()
+    yield
+
+
 app = FastAPI(
     title=settings.app_name,
     description="Simulation-first AI operations copilot for enterprise IT teams.",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
 app.include_router(routes_health.router)
@@ -25,11 +34,6 @@ app.include_router(routes_workflows.router)
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-
-
-@app.on_event("startup")
-def startup() -> None:
-    seed_demo_database()
 
 
 @app.get("/")

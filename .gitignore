@@ -13,3 +13,5 @@ reports/*.md
 !reports/.gitkeep
 !reports/sample-*.json
 !reports/sample-*.md
+!reports/*-sample.json
+!reports/*-sample.md

@@ -1,0 +1,17 @@
+{
+  "report_type": "ticket-analysis",
+  "subject": "TCK-1001",
+  "summary": "Ticket classified as access_troubleshooting.",
+  "findings": [
+    "Category: access_troubleshooting",
+    "Urgency: medium",
+    "Likely system: Microsoft Teams",
+    "Risk level: medium",
+    "Automation candidate: true"
+  ],
+  "planned_actions": [
+    {"operation": "plan", "target": "classify-ticket:TCK-1001", "simulation_only": true}
+  ],
+  "safety_notes": ["Ticket analysis is advisory and should be reviewed by the service desk."],
+  "simulation_only": true
+}

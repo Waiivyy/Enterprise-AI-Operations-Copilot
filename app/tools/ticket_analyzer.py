@@ -4,6 +4,21 @@ from app.models.ticket import Ticket, TicketAnalysis
 def analyze_ticket(ticket: Ticket) -> TicketAnalysis:
     text = f"{ticket.title} {ticket.description}".lower()
     if "teams" in text or "license" in text:
+        if "device" in text or "compliance" in text:
+            return TicketAnalysis(
+                ticket_id=ticket.ticket_id,
+                category="device_compliance",
+                urgency="medium",
+                likely_system="Endpoint compliance",
+                suggested_next_steps=[
+                    "Confirm device compliance status",
+                    "Review conditional access placeholder policy",
+                    "Collect device check-in timestamp",
+                ],
+                required_approvals=["Endpoint support review if policy exception is requested"],
+                automation_candidate=False,
+                risk_level="medium",
+            )
         return TicketAnalysis(
             ticket_id=ticket.ticket_id,
             category="access_troubleshooting",

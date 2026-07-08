@@ -1,0 +1,15 @@
+{
+  "report_type": "access-troubleshooting",
+  "subject": "maria.novak@example.invalid",
+  "summary": "Likely cause: Teams license missing.",
+  "findings": [
+    "User has sku-m365-business-basic",
+    "Sample Teams policy requires sku-m365-business-premium"
+  ],
+  "planned_actions": [
+    {"operation": "plan", "target": "review-license-assignment", "simulation_only": true},
+    {"operation": "plan", "target": "review-group-membership", "simulation_only": true}
+  ],
+  "safety_notes": ["No tenant changes were executed."],
+  "simulation_only": true
+}

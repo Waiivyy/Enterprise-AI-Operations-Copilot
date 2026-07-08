@@ -1,0 +1,16 @@
+{
+  "report_type": "onboarding",
+  "subject": "Sara Holm",
+  "summary": "Simulation-only onboarding plan for Sara Holm.",
+  "findings": [
+    "Recommended license: Microsoft 365 Business Premium",
+    "Recommended groups: group-employees, group-engineering, group-europe",
+    "SaaS payloads prepared for Slack, Box, Notion, Zoom, and GitHub Enterprise"
+  ],
+  "planned_actions": [
+    {"operation": "plan", "target": "assign-license", "simulation_only": true},
+    {"operation": "plan", "target": "add-group:group-engineering", "simulation_only": true}
+  ],
+  "safety_notes": ["No tenant changes were executed."],
+  "simulation_only": true
+}

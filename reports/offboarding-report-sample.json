@@ -1,0 +1,17 @@
+{
+  "report_type": "offboarding",
+  "subject": "Priya Shah",
+  "summary": "Simulation-only offboarding plan for Priya Shah.",
+  "findings": [
+    "HR confirmation required",
+    "Manager mailbox handoff review required",
+    "SaaS deprovisioning payloads prepared"
+  ],
+  "planned_actions": [
+    {"operation": "plan", "target": "disable-sign-in", "simulation_only": true},
+    {"operation": "plan", "target": "revoke-sessions", "simulation_only": true},
+    {"operation": "plan", "target": "remove-licenses", "simulation_only": true}
+  ],
+  "safety_notes": ["No tenant changes were executed."],
+  "simulation_only": true
+}

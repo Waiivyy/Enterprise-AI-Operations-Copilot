@@ -55,3 +55,31 @@ Expected finding:
 - Evidence: Maria has `sku-m365-business-basic`, while the sample Teams policy requires `sku-m365-business-premium`.
 - Recommended action: review license assignment and group membership.
 - Confidence: high enough for triage, not a production diagnosis.
+
+## Missing Group Prompt
+
+Prompt:
+
+```text
+lena.ortiz@example.invalid cannot access Teams.
+```
+
+Expected finding:
+
+- Likely cause: Teams group membership missing.
+- Evidence: user has the Teams license but lacks `group-employees`.
+- Recommended action: review group membership and app assignment policy.
+
+## Ticket Classification Prompt
+
+Prompt:
+
+```text
+Analyze this ticket: Noah has the Teams license but access is blocked after a device compliance prompt.
+```
+
+Expected finding:
+
+- Category: device compliance.
+- Likely system: endpoint compliance.
+- Automation candidate: no, because the workflow needs endpoint review.

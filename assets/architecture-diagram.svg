@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="460" viewBox="0 0 1180 460" role="img" aria-labelledby="title desc">
+  <title id="title">Enterprise AI Operations Copilot architecture</title>
+  <desc id="desc">Simulation-first request flow from FastAPI through planner, mock LLM provider, tool router, mock tools, and report outputs.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f5f7fb; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .core { fill: #eaf1ff; stroke: #2458d3; }
+      .tool { fill: #f8fafc; stroke: #94a3b8; }
+      .report { fill: #ecfdf5; stroke: #0f766e; }
+      .text { fill: #18212f; font-family: Arial, sans-serif; font-size: 15px; font-weight: 700; }
+      .small { fill: #526173; font-family: Arial, sans-serif; font-size: 12px; }
+      .line { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+    </marker>
+  </defs>
+  <rect class="bg" width="1180" height="460" />
+  <rect class="box" x="36" y="175" width="135" height="70" />
+  <text class="text" x="62" y="207">User request</text>
+  <text class="small" x="58" y="226">prompt + scenario</text>
+  <rect class="box core" x="220" y="175" width="130" height="70" />
+  <text class="text" x="260" y="207">FastAPI</text>
+  <text class="small" x="248" y="226">API + static UI</text>
+  <rect class="box core" x="395" y="175" width="155" height="70" />
+  <text class="text" x="428" y="207">Copilot planner</text>
+  <text class="small" x="422" y="226">schema-driven plans</text>
+  <rect class="box core" x="600" y="175" width="155" height="70" />
+  <text class="text" x="618" y="207">Mock LLM provider</text>
+  <text class="small" x="626" y="226">deterministic default</text>
+  <rect class="box core" x="810" y="175" width="130" height="70" />
+  <text class="text" x="843" y="207">Tool router</text>
+  <text class="small" x="828" y="226">mock tools only</text>
+  <rect class="box tool" x="985" y="30" width="155" height="48" />
+  <text class="text" x="1016" y="60">License advisor</text>
+  <rect class="box tool" x="985" y="96" width="155" height="48" />
+  <text class="text" x="1024" y="126">Group advisor</text>
+  <rect class="box tool" x="985" y="162" width="155" height="48" />
+  <text class="text" x="1025" y="192">Ticket analyzer</text>
+  <rect class="box tool" x="985" y="228" width="155" height="48" />
+  <text class="text" x="1015" y="258">Mock Graph</text>
+  <rect class="box tool" x="985" y="294" width="155" height="48" />
+  <text class="text" x="1010" y="324">SaaS payloads</text>
+  <rect class="box report" x="985" y="360" width="155" height="48" />
+  <text class="text" x="1018" y="390">Report writer</text>
+  <rect class="box report" x="760" y="360" width="155" height="48" />
+  <text class="text" x="779" y="390">Markdown + JSON</text>
+  <path class="line" d="M171 210 H220" />
+  <path class="line" d="M350 210 H395" />
+  <path class="line" d="M550 210 H600" />
+  <path class="line" d="M755 210 H810" />
+  <path class="line" d="M940 210 C965 210 955 54 985 54" />
+  <path class="line" d="M940 210 C965 210 955 120 985 120" />
+  <path class="line" d="M940 210 C965 210 955 186 985 186" />
+  <path class="line" d="M940 210 C965 210 955 252 985 252" />
+  <path class="line" d="M940 210 C965 210 955 318 985 318" />
+  <path class="line" d="M940 210 C965 210 955 384 985 384" />
+  <path class="line" d="M985 384 H915" />
+  <text class="small" x="36" y="430">Simulation boundary: no live Microsoft Graph calls, no SaaS writes, no secrets, and all destructive actions become plan-only artifacts.</text>
+</svg>

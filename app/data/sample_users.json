@@ -22,5 +22,21 @@
     "region": "North America",
     "employment_type": "full-time",
     "manager": "Elena Cruz"
+  },
+  {
+    "display_name": "Lena Ortiz",
+    "email": "lena.ortiz@example.invalid",
+    "department": "Engineering",
+    "region": "Europe",
+    "employment_type": "full-time",
+    "manager": "Nina Patel"
+  },
+  {
+    "display_name": "Noah Reed",
+    "email": "noah.reed@example.invalid",
+    "department": "Engineering",
+    "region": "North America",
+    "employment_type": "contractor",
+    "manager": "Avery Stone"
   }
 ]

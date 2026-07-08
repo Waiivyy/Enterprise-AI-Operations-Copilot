@@ -12,32 +12,51 @@
         <header class="topbar">
           <div>
             <h1>Enterprise AI Operations Copilot</h1>
-            <p>Simulation-first workflow planning for internal IT operations teams.</p>
+            <p>Deterministic mock LLM planning, safe tool routing, and audit-style output for internal IT operations workflows.</p>
           </div>
           <span class="status">Simulation mode</span>
         </header>
 
         <section class="composer" aria-label="Copilot request">
-          <label for="scenario">Scenario</label>
-          <select id="scenario">
-            <option value="onboarding">Onboarding</option>
-            <option value="offboarding">Offboarding</option>
-            <option value="access_troubleshooting">Access troubleshooting</option>
-            <option value="ticket_analysis">Ticket analysis</option>
-          </select>
+          <div class="form-row">
+            <div>
+              <label for="scenario">Scenario</label>
+              <select id="scenario">
+                <option value="onboarding">Onboarding planning</option>
+                <option value="offboarding">Offboarding planning</option>
+                <option value="access_troubleshooting">Access troubleshooting</option>
+                <option value="ticket_analysis">Ticket analysis</option>
+              </select>
+            </div>
+            <button id="submit" type="button">Generate plan</button>
+          </div>
+
+          <div>
+            <label>Example prompts</label>
+            <div class="prompt-buttons">
+              <button class="example" type="button" data-scenario="onboarding">Onboard Sara</button>
+              <button class="example" type="button" data-scenario="offboarding">Offboard Priya</button>
+              <button class="example" type="button" data-scenario="access_troubleshooting">Teams license issue</button>
+              <button class="example" type="button" data-scenario="ticket_analysis">Classify ticket</button>
+            </div>
+          </div>
+
           <label for="message">Request</label>
           <textarea id="message" rows="5">Plan onboarding for Sara, full-time employee in Europe, joining Engineering next Monday.</textarea>
-          <button id="submit" type="button">Generate plan</button>
         </section>
 
         <section class="result-grid" aria-live="polite">
-          <article class="panel">
+          <article class="panel response-panel">
             <h2>Structured Response</h2>
             <pre id="summary">Submit a request to generate a simulation-only plan.</pre>
           </article>
           <article class="panel">
             <h2>Planned Actions</h2>
             <ul id="actions"></ul>
+          </article>
+          <article class="panel">
+            <h2>Evidence</h2>
+            <ul id="evidence"></ul>
           </article>
           <article class="panel">
             <h2>Safety Notes</h2>
@@ -51,6 +70,7 @@
       const message = document.querySelector("#message");
       const summary = document.querySelector("#summary");
       const actions = document.querySelector("#actions");
+      const evidence = document.querySelector("#evidence");
       const safety = document.querySelector("#safety");
 
       const examples = {
@@ -60,6 +80,13 @@
         ticket_analysis: "Analyze this ticket: Maria can sign in but Teams says the license is missing."
       };
 
+      for (const button of document.querySelectorAll(".example")) {
+        button.addEventListener("click", () => {
+          scenario.value = button.dataset.scenario;
+          message.value = examples[button.dataset.scenario];
+        });
+      }
+
       scenario.addEventListener("change", () => {
         message.value = examples[scenario.value];
       });
@@ -67,6 +94,7 @@
       document.querySelector("#submit").addEventListener("click", async () => {
         summary.textContent = "Generating...";
         actions.innerHTML = "";
+        evidence.innerHTML = "";
         safety.innerHTML = "";
         const response = await fetch("/chat", {
           method: "POST",
@@ -77,13 +105,18 @@
         summary.textContent = JSON.stringify({
           scenario: payload.scenario,
           summary: payload.summary,
-          evidence: payload.evidence,
-          tool_plan: payload.tool_plan
+          tool_plan: payload.tool_plan,
+          report_id: payload.report_id
         }, null, 2);
         for (const action of payload.planned_actions || []) {
           const item = document.createElement("li");
           item.textContent = `${action.target}: ${action.description}`;
           actions.appendChild(item);
+        }
+        for (const itemText of payload.evidence || []) {
+          const item = document.createElement("li");
+          item.textContent = itemText;
+          evidence.appendChild(item);
         }
         for (const note of payload.safety_notes || []) {
           const item = document.createElement("li");

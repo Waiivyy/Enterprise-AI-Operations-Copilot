@@ -17,6 +17,24 @@
       "region": "Europe",
       "device_compliant": true,
       "conditional_access_placeholder": "no-blocking-policy"
+    },
+    "lena.ortiz@example.invalid": {
+      "display_name": "Lena Ortiz",
+      "account_enabled": true,
+      "assigned_licenses": ["sku-m365-business-premium"],
+      "groups": ["group-engineering", "group-europe"],
+      "region": "Europe",
+      "device_compliant": true,
+      "conditional_access_placeholder": "no-blocking-policy"
+    },
+    "noah.reed@example.invalid": {
+      "display_name": "Noah Reed",
+      "account_enabled": true,
+      "assigned_licenses": ["sku-m365-business-premium"],
+      "groups": ["group-employees", "group-engineering"],
+      "region": "North America",
+      "device_compliant": false,
+      "conditional_access_placeholder": "device-compliance-review"
     }
   },
   "app_requirements": {

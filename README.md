@@ -37,13 +37,13 @@ flowchart LR
   api --> planner[Copilot planner]
   planner --> llm[Mock LLM provider]
   llm --> router[Tool router]
-  router --> graph[Mock Graph client]
-  router --> license[License advisor]
-  router --> groups[Group advisor]
-  router --> tickets[Ticket analyzer]
-  router --> reports[Report writer]
-  reports --> md[Markdown reports]
-  reports --> json[JSON reports]
+  router --> graphMock[Mock Graph client]
+  router --> licenseAdvisor[License advisor]
+  router --> groupAdvisor[Group advisor]
+  router --> ticketAnalyzer[Ticket analyzer]
+  router --> reportWriter[Report writer]
+  reportWriter --> markdownReports[Markdown reports]
+  reportWriter --> jsonReports[JSON reports]
 ```
 
 ## Features

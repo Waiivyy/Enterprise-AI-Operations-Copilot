@@ -1,5 +1,7 @@
 # Enterprise AI Operations Copilot
 
+[![CI](https://github.com/Waiivyy/Enterprise-AI-Operations-Copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/Waiivyy/Enterprise-AI-Operations-Copilot/actions/workflows/ci.yml)
+
 A simulation-first AI operations copilot for enterprise IT teams. It demonstrates how LLM planning, tool calling, mock Microsoft Graph workflows, IT ticket analysis, and audit reporting can be combined to support safer onboarding, offboarding, and access troubleshooting.
 
 This project demonstrates the architecture of an AI-assisted operations copilot. The default demo uses a deterministic mock LLM provider so the repository can run without paid APIs or secrets. It does not connect to a real Microsoft 365 tenant or require OpenAI, Azure, Microsoft Graph, Slack, Box, Zoom, Notion, or company credentials.
@@ -249,6 +251,16 @@ Run tests:
 pytest
 ```
 
+Run the browser-level UI smoke test:
+
+```bash
+python -m pip install -e ".[dev,e2e]"
+python -m playwright install chromium
+pytest -m e2e
+```
+
+The browser test starts the FastAPI app on an available local port, submits the Teams access-troubleshooting example in Chromium, and verifies the structured response, planned actions, evidence, and safety notes.
+
 ## Run With Docker
 
 ```bash
@@ -272,7 +284,10 @@ The app will be available at `http://127.0.0.1:8000`.
 - Add approval-chain modeling.
 - Add optional OpenAI-compatible provider implementation behind explicit configuration.
 - Add richer report templates and redaction checks.
-- Add screenshot assets after running the local demo.
+
+## Contributing and Security
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for local development and pull request expectations. Report security concerns using the process in [SECURITY.md](SECURITY.md); never include real credentials, tenant details, or employee data.
 
 ## License
 

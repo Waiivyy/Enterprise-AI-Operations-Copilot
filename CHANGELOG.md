@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Added public security and contribution policies.
+- Added weekly Dependabot checks for Python and GitHub Actions dependencies.
+- Added a Playwright browser smoke test and dedicated GitHub Actions job.
+- Made API route planners honor the configured report output directory.
+- Updated the README with CI status and browser-test instructions.
+
 ## v0.1.0 - 2026-07-08
 
 Initial simulation-first prototype.

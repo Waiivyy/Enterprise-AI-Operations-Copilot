@@ -6,6 +6,5 @@
 - Add richer report templates and report redaction tests.
 - Add optional OpenAI-compatible provider support behind explicit configuration.
 - Add more sample tickets for endpoint, access, and SaaS incidents.
-- Add generated screenshots under `assets/` after a clean local demo run.
 - Add route coverage for every workflow endpoint.
 - Add report redaction checks for future richer sample data.

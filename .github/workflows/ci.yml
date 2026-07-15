@@ -5,7 +5,8 @@ on:
   pull_request:
 
 jobs:
-  test:
+  unit-tests:
+    name: Unit tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,3 +17,19 @@ jobs:
         run: python -m pip install --upgrade pip && python -m pip install ".[dev]"
       - name: Run tests
         run: pytest
+
+  ui-smoke:
+    name: UI smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip && python -m pip install ".[dev,e2e]"
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
+      - name: Run browser smoke test
+        run: pytest -m e2e

@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.copilot.planner import CopilotPlanner
+from app.core.config import get_settings
 from app.models.workflow import (
     AccessTroubleshootingRequest,
     ChatResponse,
@@ -11,7 +12,7 @@ from app.models.workflow import (
 )
 
 router = APIRouter()
-planner = CopilotPlanner()
+planner = CopilotPlanner(report_dir=get_settings().reports_dir)
 
 
 @router.post("/workflows/onboarding", response_model=OnboardingPlan)
